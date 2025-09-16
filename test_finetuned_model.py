@@ -4,9 +4,10 @@ This allows you to chat with your fine-tuned model that has learned
 from your document knowledge base.
 """
 
-import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
+# Third-party imports
 import streamlit as st
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 class FineTunedModelInference:
     def __init__(self, model_path="./finetuned_model"):

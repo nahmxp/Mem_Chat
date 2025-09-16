@@ -9,7 +9,7 @@ Mem_Chat is an advanced PDF chatbot application that allows users to upload PDF 
 ## ✨ Key Features
 
 ### 🔒 **Encrypted Vector Storage**
-- Uses FAISS vector database with military-grade encryption
+- Dual backend support: FAISS (performance) or SQLite+Vec (mobile-friendly)
 - All document embeddings and metadata are encrypted at rest
 - Secure key management with automatic key generation
 
@@ -23,6 +23,11 @@ Mem_Chat is an advanced PDF chatbot application that allows users to upload PDF 
 - **RAG (Retrieval-Augmented Generation)**: Traditional vector search + generation
 - **Fine-tuned Model**: Self-contained model trained on your documents
 - **Hybrid Mode**: Choose between approaches or use both
+
+### 🗄️ **Flexible Storage Backends**
+- **FAISS**: Maximum performance for large datasets (desktop/server)
+- **SQLite+Vec**: Mobile-friendly with excellent Flutter integration
+- **Encrypted Storage**: All data encrypted at rest with both backends
 
 ### 💬 **Interactive Chat Interface**
 - Clean, modern Streamlit web interface
@@ -44,6 +49,35 @@ Mem_Chat is an advanced PDF chatbot application that allows users to upload PDF 
 
 ## 🛠️ Technical Architecture
 
+### Storage Backend Options
+
+**FAISS Backend** (`main.py`)
+- **Best for**: Desktop applications requiring maximum performance
+- **Advantages**: Ultra-fast vector similarity search, optimal for large document sets
+- **Use when**: Performance is critical, desktop-only deployment
+
+**SQLite+Vec Backend** (`main_sqlite.py`)  
+- **Best for**: Mobile apps, cross-platform deployment, Flutter integration
+- **Advantages**: Self-contained database, mobile-friendly, SQL compatibility
+- **Use when**: Flutter/mobile integration needed, simpler deployment required
+
+**Hybrid Backend** (`main_hybrid.py`)
+- **Best for**: Applications needing both RAG and fine-tuned model responses
+- **Advantages**: Combines retrieval-augmented generation with custom fine-tuned models
+- **Use when**: Maximum answer quality and variety needed
+
+### Backend Comparison
+
+| Feature | FAISS | SQLite+Vec |
+|---------|-------|------------|
+| Performance | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| Mobile Support | ❌ | ✅ |
+| Setup Complexity | Medium | Low |
+| Dependencies | NumPy, FAISS | SQLite only |
+| File Size | Larger | Smaller |
+| Query Speed | Fastest | Fast |
+| Flutter Integration | ❌ | ✅ |
+
 ### Core Components
 
 1. **AdvancedEncryptedVectorStore**: Main class handling document processing and storage
@@ -56,8 +90,8 @@ Mem_Chat is an advanced PDF chatbot application that allows users to upload PDF 
 
 - **Backend**: Python 3.8+
 - **AI/ML**: Ollama (Qwen2.5:7b, nomic-embed-text)
-- **Vector Database**: FAISS with encryption
-- **Document Processing**: PyPDF2, LangChain
+- **Vector Database**: FAISS with encryption / SQLite+Vec for mobile
+- **Document Processing**: PyPDF2, LangChain, python-docx
 - **Security**: Cryptography (Fernet encryption)
 - **Frontend**: Streamlit
 - **Text Processing**: RecursiveCharacterTextSplitter
@@ -86,18 +120,36 @@ ollama pull nomic-embed-text
 # Navigate to project directory
 cd Mem_Chat
 
-# Install Python dependencies
+# Easy setup with provided scripts:
+# Windows:
+setup.bat
+
+# Linux/Mac:
+chmod +x setup.sh
+./setup.sh
+
+# Or manual installation:
 pip install -r requirements.txt
 ```
 
-### 3. Run the Application
+### 3. Choose Your Backend and Run
 
+#### **FAISS Version** (Maximum Performance)
 ```bash
-# Start the Streamlit app
 streamlit run main.py
 ```
 
-The application will open in your browser at `http://localhost:8501`
+#### **SQLite+Vec Version** (Flutter-Friendly)
+```bash
+streamlit run main_sqlite.py
+```
+
+#### **Hybrid Version** (Both RAG + Fine-tuned)
+```bash
+streamlit run main_hybrid.py
+```
+
+The application will open in your browser (usually `http://localhost:8501` or `8502`)
 
 ## 📖 Usage Guide
 
@@ -168,18 +220,25 @@ The application uses these Ollama models by default:
 
 ```
 Mem_Chat/
-├── main.py                     # Main RAG-based application
+├── main.py                     # FAISS-based application (desktop)
+├── main_sqlite.py             # SQLite+Vec version (mobile-friendly)
 ├── main_hybrid.py             # Hybrid app (RAG + Fine-tuned)
 ├── extract_faiss_data.py      # Extract training data from FAISS
 ├── train_conversational.py    # Fine-tuning script
 ├── test_finetuned_model.py   # Fine-tuned model inference
+├── setup.bat                  # Windows setup script
+├── setup.sh                   # Linux/Mac setup script
 ├── requirements.txt           # Python dependencies
 ├── README.md                 # This file
 ├── FINETUNING_GUIDE.md      # Detailed fine-tuning guide
-├── encrypted_faiss_storage/  # Encrypted vector store (auto-created)
+├── encrypted_faiss_storage/  # FAISS encrypted vector store (auto-created)
 │   ├── key.key              # Encryption key
 │   ├── faiss_index.encrypted # Encrypted FAISS index
 │   ├── metadata.encrypted   # Encrypted chunk metadata
+│   └── doc_versions.encrypted # Document version tracking
+├── encrypted_sqlite_storage/ # SQLite+Vec encrypted store (auto-created)
+│   ├── key.key              # Encryption key
+│   ├── vector_db.encrypted  # Encrypted SQLite database
 │   └── doc_versions.encrypted # Document version tracking
 ├── training_data/           # Generated training data (auto-created)
 │   ├── faiss_training_data.json

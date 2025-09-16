@@ -1,12 +1,15 @@
-import os
+# Standard library imports
 import json
+import os
 import pickle
-from datetime import datetime
-from cryptography.fernet import Fernet
-from langchain_community.llms import Ollama
 import random
 import re
-from typing import List, Dict, Tuple
+from datetime import datetime
+from typing import Dict, List, Tuple
+
+# Third-party imports
+from cryptography.fernet import Fernet
+from langchain_community.llms import Ollama
 
 class FAISSDataExtractor:
     """

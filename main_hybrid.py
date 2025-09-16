@@ -4,21 +4,26 @@ This gives you the choice between vector retrieval (RAG) and direct
 fine-tuned model inference for answering questions.
 """
 
-import streamlit as st
-import traceback
+# Standard library imports
 import hashlib
-import pickle
-import os
 import json
+import os
+import pickle
+import traceback
 from datetime import datetime
+
+# Third-party imports
+import streamlit as st
 from cryptography.fernet import Fernet
 from PyPDF2 import PdfReader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import FAISS
+
+# LangChain imports
 from langchain.chains.question_answering import load_qa_chain
-from langchain_ollama import OllamaEmbeddings
 from langchain.prompts import PromptTemplate
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.llms import Ollama
+from langchain_community.vectorstores import FAISS
+from langchain_ollama import OllamaEmbeddings
 
 # Import the fine-tuned model inference class
 try:

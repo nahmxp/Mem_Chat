@@ -7,6 +7,9 @@ PyPDF2>=3.0.1
 cryptography>=41.0.0
 ollama>=0.1.7
 
+# SQLite Vector Search (alternative to FAISS)
+sqlite-vec>=0.1.6
+
 # Fine-tuning dependencies (CPU versions first, see setup note below)
 --extra-index-url https://download.pytorch.org/whl/cu118
 torch==2.7.1+cu118

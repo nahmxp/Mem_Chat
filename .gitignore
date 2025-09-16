@@ -57,6 +57,12 @@ Thumbs.db
 encrypted_faiss_storage/
 temp_faiss_*/
 
+# SQLite+Vec Storage (encrypted knowledge base)
+encrypted_sqlite_storage/
+*.db
+*.sqlite
+*.sqlite3
+
 # Training Data (generated files)
 training_data/
 processed/

@@ -13,19 +13,24 @@ Usage:
 The resulting model will be saved to ./finetuned_model/
 """
 
-import torch
+# Standard library imports
 import json
 import os
-from datasets import Dataset, load_from_disk
-from transformers import (
-    AutoTokenizer, AutoModelForCausalLM,
-    TrainingArguments, Trainer,
-    DataCollatorForLanguageModeling,
-    EarlyStoppingCallback
-)
-import numpy as np
-from torch.utils.tensorboard import SummaryWriter
 import time
+
+# Third-party imports
+import numpy as np
+import torch
+from datasets import Dataset, load_from_disk
+from torch.utils.tensorboard import SummaryWriter
+from transformers import (
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    DataCollatorForLanguageModeling,
+    EarlyStoppingCallback,
+    Trainer,
+    TrainingArguments,
+)
 
 class ConversationalTrainer:
     def __init__(self, model_name="microsoft/DialoGPT-small", dataset_path="./training_data/faiss_training_data.json"):
