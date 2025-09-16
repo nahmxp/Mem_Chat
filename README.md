@@ -19,6 +19,11 @@ Mem_Chat is an advanced PDF chatbot application that allows users to upload PDF 
 - **Hash-based Detection**: Uses SHA256 hashing to detect document changes
 - **Chunk-level Updates**: Identifies and updates only modified text chunks
 
+### 🎯 **Dual AI Approaches**
+- **RAG (Retrieval-Augmented Generation)**: Traditional vector search + generation
+- **Fine-tuned Model**: Self-contained model trained on your documents
+- **Hybrid Mode**: Choose between approaches or use both
+
 ### 💬 **Interactive Chat Interface**
 - Clean, modern Streamlit web interface
 - Real-time conversation with your documents
@@ -119,6 +124,34 @@ The application will open in your browser at `http://localhost:8501`
 - See total documents and text chunks
 - Check document list with last update timestamps
 
+## 🎯 Fine-Tuning Your Own Model
+
+For even better performance, you can create a self-contained model trained specifically on your documents:
+
+### Quick Start Fine-Tuning
+
+```bash
+# 1. Extract training data from your knowledge base
+python extract_faiss_data.py
+
+# 2. Fine-tune a model on your documents
+python train_conversational.py
+
+# 3. Test your fine-tuned model
+python test_finetuned_model.py
+
+# 4. Use hybrid app with both approaches
+streamlit run main_hybrid.py
+```
+
+**Benefits of Fine-Tuning:**
+- ⚡ **Faster responses** (no vector search needed)
+- 🧠 **Better understanding** of your specific domain
+- 🔄 **Self-contained** model that works offline
+- 📈 **Improved accuracy** for domain-specific questions
+
+For detailed fine-tuning instructions, see [FINETUNING_GUIDE.md](FINETUNING_GUIDE.md)
+
 ## 🔧 Configuration
 
 ### Model Configuration
@@ -135,14 +168,26 @@ The application uses these Ollama models by default:
 
 ```
 Mem_Chat/
-├── main.py                     # Main application file
+├── main.py                     # Main RAG-based application
+├── main_hybrid.py             # Hybrid app (RAG + Fine-tuned)
+├── extract_faiss_data.py      # Extract training data from FAISS
+├── train_conversational.py    # Fine-tuning script
+├── test_finetuned_model.py   # Fine-tuned model inference
 ├── requirements.txt           # Python dependencies
 ├── README.md                 # This file
-└── encrypted_faiss_storage/  # Encrypted vector store (auto-created)
-    ├── key.key              # Encryption key
-    ├── faiss_index.encrypted # Encrypted FAISS index
-    ├── metadata.encrypted   # Encrypted chunk metadata
-    └── doc_versions.encrypted # Document version tracking
+├── FINETUNING_GUIDE.md      # Detailed fine-tuning guide
+├── encrypted_faiss_storage/  # Encrypted vector store (auto-created)
+│   ├── key.key              # Encryption key
+│   ├── faiss_index.encrypted # Encrypted FAISS index
+│   ├── metadata.encrypted   # Encrypted chunk metadata
+│   └── doc_versions.encrypted # Document version tracking
+├── training_data/           # Generated training data (auto-created)
+│   ├── faiss_training_data.json
+│   └── training_stats.json
+└── finetuned_model/        # Your trained model (after fine-tuning)
+    ├── config.json
+    ├── pytorch_model.bin
+    └── tokenizer files...
 ```
 
 ## 🛡️ Security Features

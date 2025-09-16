@@ -6,3 +6,19 @@ faiss-cpu>=1.7.4
 PyPDF2>=3.0.1
 cryptography>=41.0.0
 ollama>=0.1.7
+
+# Fine-tuning dependencies (CPU versions first, see setup note below)
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch==2.7.1+cu118
+torchvision
+torchaudio
+transformers>=4.30.0
+datasets>=2.14.0
+accelerate>=0.20.0
+tensorboard>=2.13.0
+
+# IMPORTANT SETUP NOTE:
+# For CUDA support, PyTorch must be installed from the CUDA index.
+# The --extra-index-url above ensures CUDA versions are found.
+# If you have issues, manually install with:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118

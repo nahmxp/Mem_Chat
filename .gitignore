@@ -1,0 +1,136 @@
+# Mem_Chat .gitignore
+# Exclude large files, models, and generated data from Git
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# FAISS Storage (encrypted knowledge base)
+encrypted_faiss_storage/
+temp_faiss_*/
+
+# Training Data (generated files)
+training_data/
+processed/
+*.json
+!requirements.txt
+
+# Fine-tuned Models (large model files)
+finetuned_model/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+
+# TensorBoard logs
+runs/
+logs/
+tb_logs/
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# Large data files
+*.pdf
+*.docx
+*.txt
+*.csv
+*.xlsx
+!README.md
+!FINETUNING_GUIDE.md
+!requirements.txt
+
+# Model cache
+.cache/
+transformers_cache/
+huggingface_hub/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# PyTorch Lightning
+lightning_logs/
+
+# Weights & Biases
+wandb/
+
+# MLflow
+mlruns/
+
+# DVC (if used)
+.dvc/
+
+# Backup files
+*.bak
+*.backup
+
+# Environment variables
+.env.local
+.env.*.local
+
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Large uploads
+uploads/
+documents/
