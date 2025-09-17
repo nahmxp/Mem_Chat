@@ -1,4 +1,4 @@
-# Check CUDA and GPU setup
+python# Check CUDA and GPU setup
 import torch
 import transformers
 
